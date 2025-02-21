@@ -1,0 +1,116 @@
+/* createNotes.module.css */
+
+.box {
+    background-image: url('../images/createNotes.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Semi-transparent overlay for better text visibility */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    z-index: 1;
+}
+
+/* Heading at the top */
+h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    color: #fff;
+    margin-top: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Form container with glassmorphism effect */
+.form_container {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Creates space below the heading */
+}
+
+/* Form elements */
+label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    border-color: pink;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button styling */
+.button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: pink;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    border: 2px solid pink;
+}
+
+.button:hover {
+    background-color: white; /* Initial background color */
+    color: black; /* Initial text color */
+    border: 2px solid pink; /* Pink border */
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+}
+
+div {
+    margin-bottom: 15px;
+}

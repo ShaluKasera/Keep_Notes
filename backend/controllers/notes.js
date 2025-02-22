@@ -6,7 +6,7 @@ const createNotes = async(req,res) => {
         const {title,content,category} = req.body;
         const author = req.user.id;
 
-        if (!title || !body || !category) {
+        if (!title || !content || !category) {
             return res.status(400).json({ msg: "All fields are required" });
           }
 

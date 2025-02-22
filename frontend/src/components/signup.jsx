@@ -14,8 +14,8 @@ const Signup = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous error messages
-    setSuccess(""); // Clear previous success messages
+    setError("");
+    setSuccess("");
 
     try {
       const response = await axios.post(
@@ -24,44 +24,33 @@ const Signup = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      console.log("Response from server:", response.data);
-
-      if (response.data.msg === "Successfully signed up") {
-        setSuccess("Signup successful! Redirecting to login...");
+      const data = response.data;
+      if (response.status === 400) {
+        setError("All fields are required");
+      } else if (response.status === 409) {
+        setError("User already exists! Please login.");
         setTimeout(() => {
           navigate("/login");
         }, 1500);
-      } else if (response.data.msg === "User already exists") {
-        setError("User already exists. Please login.");
-        navigate("/login");
+      } else if (response.status === 401) {
+        setError(
+          "Password must be 6-10 chars long, include uppercase, lowercase, digit, special character, and not contain your name."
+        );
+      } else if (response.status === 201) {
+        setSuccess("Successfully signed up ");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } else {
-        // Handle unexpected responses
-        setError(response.data.msg || "Signup failed. Please try again.");
+        setError("Signup failed! Try again");
       }
     } catch (error) {
       console.error("Signup error details:", error);
 
-      if (error.response) {
-        // Log error response from backend
-        console.error("Error Response Status:", error.response.status);
-        console.error("Error Response Data:", error.response.data);
-        setError(
-          error.response.data?.msg || "Signup failed. Please try again."
-        );
-        if (error.response.data?.msg === "User already exists") {
-          navigate("/login"); 
-        }
-
-      } else if (error.request) {
-        // Handle no response from server
-        console.error("No response received:", error.request);
-        setError(
-          "No response from server. Check your API URL or server status."
-        );
+      if (error.response && error.response.data && error.response.data.msg) {
+        setError(error.response.data.msg);
       } else {
-        // Other errors
-        console.error("Error setting up request:", error.message);
-        setError("Request setup failed. Please try again.");
+        setError("Server error occurred. Please try again.");
       }
     }
   };

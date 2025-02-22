@@ -15,7 +15,7 @@ const signup = async (req, res) => {
     //check for existing user
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(409).json({ msg: "User already exists" });
     }
     
     
@@ -35,7 +35,7 @@ const signup = async (req, res) => {
     };
 
     if (!isValidPassword(password, name)) {
-      return res.status(400).json({
+      return res.status(401).json({
         message:
           "Password must be 6-10 chars long, include uppercase, lowercase, digit, special character, and not contain your name.",
       });
@@ -64,7 +64,7 @@ const login = async (req, res) => {
     const matchPassword = await bcrypt.compare(password, user.password);
 
     if (!matchPassword) {
-      return res.json({ msg: "password not matched" });
+      return res.status(401).json({ msg: "password not matched" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET, {

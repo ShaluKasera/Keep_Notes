@@ -11,19 +11,6 @@ import Notes from "./components/showNotes";
 import Home from './components/home'
 import { useEffect } from "react";
 function App() {
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: 'test@example.com', password: '123456' }),
-    })
-        .then((res) => res.json())
-        .then((data) => console.log("Test Fetch Response:", data))
-        .catch((err) => console.error("Test Fetch Error:", err));
-}, []);
-
 
   return (
     <>
